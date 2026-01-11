@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Users, Award, Clock, Lightbulb, Apple, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Users, Award, Clock, Lightbulb, Apple, Star, HelpCircle } from 'lucide-react';
 import { BRAND_NAME, FEATURES, ACHIEVEMENTS, PROGRAMS, TESTIMONIALS } from '../constants';
 import { Testimonial } from '../types';
 import Button from '../components/Button';
 import WaveSeparator from '../components/WaveSeparator';
 import EnquiryForm from '../components/EnquiryForm';
+import EnrollmentModal from '../components/EnrollmentModal';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  
+  // Helper function to navigate and scroll to top
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
   
   // Scroll animation hooks for different sections
   const statsAnimation = useScrollAnimation();
@@ -48,10 +61,10 @@ const Home: React.FC = () => {
                 Expert coaching for Class 9-12. Specializing in Mathematics and Commerce to help students grow with clarity, confidence, and consistency.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button onClick={() => navigate('/contact')}>
+                <Button onClick={() => setIsEnrollModalOpen(true)}>
                   Book Free Demo
                 </Button>
-                <Button variant="outline" onClick={() => navigate('/about')}>
+                <Button variant="outline" onClick={() => handleNavigation('/about')}>
                   Know More
                 </Button>
               </div>
@@ -309,7 +322,7 @@ const Home: React.FC = () => {
                return (
                 <div 
                   key={program.id} 
-                  onClick={() => navigate('/programs')}
+                  onClick={() => handleNavigation('/programs')}
                   className={`${styles.bg} rounded-[2.5rem] p-10 text-center transition-all duration-300 hover:-translate-y-2 cursor-pointer group`}
                 >
                   <div className="relative flex justify-center mb-8">
@@ -336,7 +349,7 @@ const Home: React.FC = () => {
           <div className="mt-12 text-center">
              <Button 
               variant="outline" 
-              onClick={() => navigate('/programs')}
+              onClick={() => handleNavigation('/programs')}
               className="rounded-full"
              >
                View All Programs
@@ -348,7 +361,7 @@ const Home: React.FC = () => {
       {/* Testimonials */}
 <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
   <div className="text-center mb-16">
-        <h2 className="text-4xl lg:text-4xl font-display font-bold text-gray-900">
+        <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900">
       Parent & Student{" "}
         <span className="relative inline-block">
           <span className="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent">
@@ -470,6 +483,47 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden">
+        <div className="absolute top-10 right-10 w-32 h-32 bg-blue-200/30 rounded-full"></div>
+        <div className="absolute bottom-20 left-10 w-24 h-24 bg-purple-200/30 rounded-full"></div>
+        
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 text-brand-accent font-semibold text-sm mb-6">Got Questions?</span>
+            <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900">
+              Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">Questions</span>
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {[
+              { q: 'Which classes do you teach?', a: 'We teach Class 9-12 students, specializing in Mathematics and Commerce subjects.' },
+              { q: 'Do you provide personal attention?', a: 'Yes! We maintain small batch sizes to ensure every student gets individual attention.' },
+              { q: 'Are regular tests conducted?', a: 'Absolutely. Regular assessments help track progress and identify areas for improvement.' },
+              { q: 'How can parents track progress?', a: 'We provide regular updates and progress reports to keep parents informed.' },
+            ].map(({ q, a }) => (
+              <div key={q} className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-brand-blue/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <HelpCircle className="text-brand-blue w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg mb-2">{q}</h3>
+                    <p className="text-gray-600">{a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enrollment Modal */}
+      <EnrollmentModal 
+        isOpen={isEnrollModalOpen} 
+        onClose={() => setIsEnrollModalOpen(false)} 
+      />
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PROGRAMS } from '../constants';
 import Button from '../components/Button';
-import { useNavigate } from 'react-router-dom';
+import EnrollmentModal from '../components/EnrollmentModal';
 import { Check } from 'lucide-react';
 
 const Programs: React.FC = () => {
-  const navigate = useNavigate();
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   return (
     <div>
@@ -67,7 +67,7 @@ const Programs: React.FC = () => {
                     </ul>
                   </div>
 
-                  <Button onClick={() => navigate('/contact')}>Enroll in {program.title}</Button>
+                  <Button onClick={() => setIsEnrollModalOpen(true)}>Enroll in {program.title}</Button>
                 </div>
                 
                 <div className="lg:w-1/2 w-full">
@@ -82,6 +82,12 @@ const Programs: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Enrollment Modal */}
+      <EnrollmentModal 
+        isOpen={isEnrollModalOpen} 
+        onClose={() => setIsEnrollModalOpen(false)} 
+      />
     </div>
   );
 };

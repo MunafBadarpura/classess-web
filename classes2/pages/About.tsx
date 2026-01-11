@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TUTOR_NAME, LOCATION, TESTIMONIALS } from '../constants';
 import { Testimonial } from '../types';
 import WaveSeparator from '../components/WaveSeparator';
+import EnrollmentModal from '../components/EnrollmentModal';
 import { CheckCircle2, Heart, Shield, Users, Building, Star, HelpCircle, Clock, TrendingUp, Award } from 'lucide-react';
 
 const About: React.FC = () => {
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  
   // Dynamic testimonial filling for seamless marquee
   const CARD_WIDTH = 300 + 24;
   const MIN_TRACK_WIDTH = typeof window !== 'undefined' ? window.innerWidth * 2 : 3840;
@@ -112,7 +115,6 @@ const About: React.FC = () => {
                   <h3 className="font-bold text-gray-900">Community Hub</h3>
                 </div>
               </div>
-              <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg">Enquire for Free</button>
             </div>
             <div className="lg:w-1/2 relative order-1 lg:order-2">
               <div className="relative">
@@ -167,14 +169,19 @@ const About: React.FC = () => {
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white font-semibold text-sm mb-6">🚀 Start Today</span>
           <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6 leading-tight">Let's Build Your Child's Confidence Together</h2>
           <p className="text-xl text-purple-100 max-w-xl mx-auto mb-8 leading-relaxed">Join MindRise and experience learning that truly makes a difference.</p>
-          <button className="bg-white text-brand-purple px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">Enquire for Free</button>
+          <button 
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="bg-white text-brand-purple px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+          >
+            Enquire for Free
+          </button>
         </div>
       </section>
 
       {/* Testimonials */}
       <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-4xl font-display font-bold text-gray-900">
+          <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900">
             Parent & Student{" "}
             <span className="relative inline-block">
               <span className="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent">Love</span>
@@ -237,6 +244,12 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Enrollment Modal */}
+      <EnrollmentModal 
+        isOpen={isEnrollModalOpen} 
+        onClose={() => setIsEnrollModalOpen(false)} 
+      />
     </div>
   );
 };
