@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Award, Lightbulb, Apple, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Users, Award, Clock, Lightbulb, Apple, Star } from 'lucide-react';
 import { BRAND_NAME, FEATURES, ACHIEVEMENTS, PROGRAMS, TESTIMONIALS } from '../constants';
 import Button from '../components/Button';
 import WaveSeparator from '../components/WaveSeparator';
@@ -87,18 +87,18 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-blue-100 relative">
+      {/* Why Choose Us - Redesigned with vibrant cards */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top section with title, description and image */}
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-20">
             {/* Left side - Title and description */}
             <div className="lg:w-1/2 text-center lg:text-left order-2 lg:order-1">
               <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900 mb-6 leading-tight">
-                Building bright futures with confidence
+                Why Students Love Learning With Us
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
-                We know that nothing is more important than your students education and growth. That's why we've implemented rigorous measures to ensure every student gets personalized attention.
+                We believe every student deserves personalized attention and a learning environment that makes complex concepts simple and enjoyable.
               </p>
             </div>
 
@@ -120,19 +120,34 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Feature cards */}
+          {/* Feature cards - Redesigned with vibrant colors */}
           <div className="grid md:grid-cols-3 gap-8">
-            {FEATURES.map((feature, idx) => (
-              <div key={idx} className="bg-white p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
-                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
-                  {React.isValidElement(feature.icon) && React.cloneElement(feature.icon as React.ReactElement, { 
-                    className: "w-8 h-8 text-blue-600" 
-                  })}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            {/* Personal Attention Card */}
+            <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-blue-200 group hover:-translate-y-1">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                <Users className="w-8 h-8 text-blue-600" />
               </div>
-            ))}
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Personal Attention</h3>
+              <p className="text-gray-700 leading-relaxed">Small batch sizes ensure every student gets the guidance they need.</p>
+            </div>
+
+            {/* Result Oriented Card */}
+            <div className="bg-gradient-to-br from-purple-100 to-purple-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-purple-200 group hover:-translate-y-1">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                <Award className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Result Oriented</h3>
+              <p className="text-gray-700 leading-relaxed">Consistent improvement in scores and strong board exam results.</p>
+            </div>
+
+            {/* Flexible Learning Card */}
+            <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-yellow-200 group hover:-translate-y-1">
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                <Clock className="w-8 h-8 text-yellow-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Flexible Learning</h3>
+              <p className="text-gray-700 leading-relaxed">Offline classes in Mumbai with online options available for convenience.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -160,14 +175,14 @@ const Home: React.FC = () => {
             <div className="lg:w-3/5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Row 1 */}
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                {/* <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Heart className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-1">Warm Welcome</h3>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -206,23 +221,24 @@ const Home: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                {/* <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
                   <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-6 h-6 text-yellow-600" />
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-1">Comforting Routines</h3>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Apple className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 mb-1">Healthy Study Habits</h3>
-                  </div>
+               <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
+                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <CheckCircle2 className="w-6 h-6 text-green-600" />
                 </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-1">Healthy Study Habits</h3>
+                </div>
+              </div>
+
 
                 <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4">
                   <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center flex-shrink-0">
