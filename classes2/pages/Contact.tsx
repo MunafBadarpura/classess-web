@@ -81,8 +81,25 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Enquiry Form */}
-            <div>
-              <EnquiryForm />
+            <div className="w-full">
+              <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 relative">
+                {/* Decorative gradient border */}
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent rounded-3xl p-0.5">
+                  <div className="bg-white rounded-3xl h-full w-full"></div>
+                </div>
+                
+                <div className="relative z-10">
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">
+                      Book Your Free Demo Class
+                    </h3>
+                    <p className="text-gray-600">
+                      Experience our teaching methodology firsthand
+                    </p>
+                  </div>
+                  <EnquiryForm />
+                </div>
+              </div>
             </div>
 
           </div>

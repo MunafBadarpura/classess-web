@@ -1,9 +1,21 @@
 import React from 'react';
-import { TUTOR_NAME, LOCATION } from '../constants';
+import { TUTOR_NAME, LOCATION, TESTIMONIALS } from '../constants';
+import { Testimonial } from '../types';
 import WaveSeparator from '../components/WaveSeparator';
-import { CheckCircle2, Heart, Shield, Users, Building } from 'lucide-react';
+import { CheckCircle2, Heart, Shield, Users, Building, Star } from 'lucide-react';
 
 const About: React.FC = () => {
+  // Dynamic testimonial filling for seamless marquee
+  const CARD_WIDTH = 300 + 24; // card width + gap
+  const MIN_TRACK_WIDTH = typeof window !== 'undefined' ? window.innerWidth * 2 : 3840;
+  const filledTestimonials: Testimonial[] = [];
+  let index = 0;
+  
+  while (filledTestimonials.length * CARD_WIDTH < MIN_TRACK_WIDTH) {
+    filledTestimonials.push(TESTIMONIALS[index % TESTIMONIALS.length]);
+    index++;
+  }
+
   return (
     <div className="pt-20">
       {/* Header */}
@@ -157,114 +169,62 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Parent & Student Love */}
-      <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900 mb-4">What the parents say</h2>
-          </div>
+      {/* Testimonials */}
+      <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl lg:text-4xl font-display font-bold text-gray-900">
+            Parent & Student{" "}
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent">
+                Love
+              </span>
+              <span className="absolute left-0 -bottom-1 w-full h-1 bg-pink-200 rounded-full"></span>
+            </span>
+          </h2>
+        </div>
 
-          {/* Scrolling testimonials container */}
-          <div className="relative">
-            <div className="overflow-hidden">
-              <div className="flex gap-6 animate-scroll-left">
-                {/* First set of testimonials */}
-                {[
-                  {
-                    id: '1',
-                    text: "MindRise helped my child gain confidence in maths. The fear of numbers is gone!",
-                    author: "Priya Sharma",
-                    role: "Parent of Class 10 Student"
-                  },
-                  {
-                    id: '2',
-                    text: "Concepts are explained very clearly with real examples. Ayesha Ma'am is very patient.",
-                    author: "Rahul Verma",
-                    role: "Class 12 Commerce Student"
-                  },
-                  {
-                    id: '3',
-                    text: "Personal attention makes a big difference. My grades improved significantly in Accounts.",
-                    author: "Sneha Patel",
-                    role: "Class 11 Student"
-                  }
-                ].map((testimonial) => (
-                  <div key={testimonial.id} className="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] flex-shrink-0 text-center">
-                    {/* Testimonial text at top */}
-                    <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
-                      {testimonial.text}
-                    </p>
-                    
-                    {/* Star rating */}
-                    <div className="flex gap-0.5 mb-4 justify-center">
-                      {[...Array(5)].map((_, i) => (
-                        <CheckCircle2 key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    
-                    {/* Author info */}
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" 
-                           style={{backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`}}>
-                        {testimonial.author.charAt(0)}
-                      </div>
-                      <div className="text-left">
-                        <h4 className="font-semibold text-gray-900 text-sm">{testimonial.author}</h4>
-                        <p className="text-xs text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
+        {/* Marquee */}
+        <div className="relative overflow-hidden w-full">
+          <div className="marquee-track flex gap-6">
+            {[...filledTestimonials, ...filledTestimonials].map((testimonial, i) => (
+              <div
+                key={`${testimonial.id}-${i}`}
+                className="bg-white p-6 rounded-2xl shadow-sm w-[300px] flex-shrink-0 text-center"
+              >
+                {/* Text */}
+                <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
+                  {testimonial.text}
+                </p>
+
+                {/* Stars */}
+                <div className="flex justify-center gap-0.5 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star
+                      key={j}
+                      className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+
+                {/* Author */}
+                <div className="flex items-center justify-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                    style={{
+                      backgroundColor: `hsl(${(i % 3) * 120}, 70%, 60%)`,
+                    }}
+                  >
+                    {testimonial.author.charAt(0)}
                   </div>
-                ))}
-                
-                {/* Duplicate set for seamless scrolling */}
-                {[
-                  {
-                    id: '1',
-                    text: "MindRise helped my child gain confidence in maths. The fear of numbers is gone!",
-                    author: "Priya Sharma",
-                    role: "Parent of Class 10 Student"
-                  },
-                  {
-                    id: '2',
-                    text: "Concepts are explained very clearly with real examples. Ayesha Ma'am is very patient.",
-                    author: "Rahul Verma",
-                    role: "Class 12 Commerce Student"
-                  },
-                  {
-                    id: '3',
-                    text: "Personal attention makes a big difference. My grades improved significantly in Accounts.",
-                    author: "Sneha Patel",
-                    role: "Class 11 Student"
-                  }
-                ].map((testimonial) => (
-                  <div key={`duplicate-${testimonial.id}`} className="bg-white p-6 rounded-2xl shadow-sm min-w-[300px] max-w-[300px] flex-shrink-0 text-center">
-                    {/* Testimonial text at top */}
-                    <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
-                      {testimonial.text}
-                    </p>
-                    
-                    {/* Star rating */}
-                    <div className="flex gap-0.5 mb-4 justify-center">
-                      {[...Array(5)].map((_, i) => (
-                        <CheckCircle2 key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    
-                    {/* Author info */}
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" 
-                           style={{backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`}}>
-                        {testimonial.author.charAt(0)}
-                      </div>
-                      <div className="text-left">
-                        <h4 className="font-semibold text-gray-900 text-sm">{testimonial.author}</h4>
-                        <p className="text-xs text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
+                  <div className="text-left">
+                    <h4 className="font-semibold text-gray-900 text-sm">
+                      {testimonial.author}
+                    </h4>
+                    <p className="text-xs text-gray-500">{testimonial.role}</p>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
