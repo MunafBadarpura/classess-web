@@ -29,13 +29,24 @@ const Navbar: React.FC = () => {
     setIsOpen(false); // Close mobile menu if open
   };
 
+  const handleLogoClick = () => {
+    navigate('/');
+    // Smooth scroll to top
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100); // Small delay to ensure navigation completes
+  };
+
   return (
     <>
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => navigate('/')}>
+            <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={handleLogoClick}>
               <div className="bg-brand-blue p-2 rounded-xl text-white mr-2">
                 <GraduationCap size={24} />
               </div>

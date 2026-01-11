@@ -1,10 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { GraduationCap, Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 import { BRAND_NAME, CONTACT_INFO, NAVIGATION } from '../constants';
 import WaveSeparator from './WaveSeparator';
+import EnrollmentModal from './EnrollmentModal';
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    // Smooth scroll to top with animation
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const handleBookDemoClick = () => {
+    setIsEnrollModalOpen(true);
+  };
   return (
     <footer className="relative bg-gray-900 text-white pt-24 pb-12 mt-auto">
       <WaveSeparator position="top" color="fill-gray-900" className="-top-1 md:-top-[60px]" />
@@ -42,15 +58,21 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {NAVIGATION.map((item) => (
                 <li key={item.name}>
-                  <Link to={item.path} className="text-gray-400 hover:text-brand-accent transition-colors text-sm">
+                  <button 
+                    onClick={() => handleNavigation(item.path)}
+                    className="text-gray-400 hover:text-brand-accent transition-colors text-sm text-left"
+                  >
                     {item.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-brand-accent transition-colors text-sm">
+                <button 
+                  onClick={handleBookDemoClick}
+                  className="text-gray-400 hover:text-brand-accent transition-colors text-sm text-left"
+                >
                   Book Demo Class
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
@@ -90,6 +112,12 @@ const Footer: React.FC = () => {
           <p>© {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.</p>
         </div>
       </div>
+
+      {/* Enrollment Modal */}
+      <EnrollmentModal 
+        isOpen={isEnrollModalOpen} 
+        onClose={() => setIsEnrollModalOpen(false)} 
+      />
     </footer>
   );
 };

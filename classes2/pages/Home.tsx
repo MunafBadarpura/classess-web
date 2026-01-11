@@ -6,9 +6,18 @@ import { Testimonial } from '../types';
 import Button from '../components/Button';
 import WaveSeparator from '../components/WaveSeparator';
 import EnquiryForm from '../components/EnquiryForm';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  
+  // Scroll animation hooks for different sections
+  const statsAnimation = useScrollAnimation();
+  const featuresAnimation = useScrollAnimation();
+  const experiencesAnimation = useScrollAnimation();
+  const programsAnimation = useScrollAnimation();
+  const testimonialsAnimation = useScrollAnimation();
+  const ctaAnimation = useScrollAnimation();
 
   // Dynamic testimonial filling for seamless marquee
   const CARD_WIDTH = 300 + 24; // card width + gap
@@ -69,7 +78,10 @@ const Home: React.FC = () => {
       {/* Stats Section */}
       <section className="bg-gradient-to-r from-purple-100 via-pink-50 to-purple-100 py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          <div 
+            ref={statsAnimation.ref}
+            className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-16 scroll-animate ${statsAnimation.isVisible ? 'visible' : ''}`}
+          >
             {/* Left side - Title and description */}
             <div className="lg:w-2/5 text-center lg:text-left">
               <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900 mb-4 leading-tight">
@@ -83,8 +95,11 @@ const Home: React.FC = () => {
             {/* Right side - Stats */}
             <div className="lg:w-3/5">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-                {ACHIEVEMENTS.map((stat) => (
-                  <div key={stat.id} className="text-center">
+                {ACHIEVEMENTS.map((stat, idx) => (
+                  <div 
+                    key={stat.id} 
+                    className={`text-center scroll-animate delay-${(idx + 1) * 100} ${statsAnimation.isVisible ? 'visible' : ''}`}
+                  >
                     <div className="text-4xl lg:text-5xl font-display font-bold text-gray-900 mb-2">
                       {stat.count}
                     </div>
@@ -103,7 +118,10 @@ const Home: React.FC = () => {
       <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top section with title, description and image */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-20">
+          <div 
+            ref={featuresAnimation.ref}
+            className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-20 scroll-animate ${featuresAnimation.isVisible ? 'visible' : ''}`}
+          >
             {/* Left side - Title and description */}
             <div className="lg:w-1/2 text-center lg:text-left order-2 lg:order-1">
               <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900 mb-6 leading-tight">
@@ -135,7 +153,7 @@ const Home: React.FC = () => {
           {/* Feature cards - Redesigned with vibrant colors */}
           <div className="grid md:grid-cols-3 gap-8">
             {/* Personal Attention Card */}
-            <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-blue-200 group hover:-translate-y-1">
+            <div className={`bg-gradient-to-br from-blue-100 to-blue-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-blue-200 group hover:-translate-y-1 scroll-animate ${featuresAnimation.isVisible ? 'visible' : ''}`}>
               <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
                 <Users className="w-8 h-8 text-blue-600" />
               </div>
@@ -144,7 +162,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Result Oriented Card */}
-            <div className="bg-gradient-to-br from-purple-100 to-purple-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-purple-200 group hover:-translate-y-1">
+            <div className={`bg-gradient-to-br from-purple-100 to-purple-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-purple-200 group hover:-translate-y-1 scroll-animate delay-100 ${featuresAnimation.isVisible ? 'visible' : ''}`}>
               <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
                 <Award className="w-8 h-8 text-purple-600" />
               </div>
@@ -153,7 +171,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Flexible Learning Card */}
-            <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-yellow-200 group hover:-translate-y-1">
+            <div className={`bg-gradient-to-br from-yellow-100 to-yellow-200 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-yellow-200 group hover:-translate-y-1 scroll-animate delay-200 ${featuresAnimation.isVisible ? 'visible' : ''}`}>
               <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
                 <Clock className="w-8 h-8 text-yellow-600" />
               </div>
@@ -390,21 +408,63 @@ const Home: React.FC = () => {
 
     
 
-      {/* CTA Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-brand-purple to-brand-blue rounded-4xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
-            {/* Decor circles */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
-            
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12">
-              <div className="lg:w-1/2 text-white">
-                <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Ready to improve your grades?</h2>
-                <p className="text-blue-100 text-lg mb-0">Join MindRise today. Limited seats available for the upcoming batch.</p>
+      {/* CTA Section - Redesigned */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-300/20 rounded-full animate-blob"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-300/20 rounded-full animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-blue-300/20 rounded-full"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+            {/* Left side - Content */}
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <div className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-semibold mb-6">
+                🚀 Start Your Journey Today
               </div>
-              <div className="lg:w-1/2 w-full">
-                <EnquiryForm />
+              <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900 mb-6 leading-tight">
+                Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">Excel</span> in Your Studies?
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+                Join MindRise today and experience personalized learning that transforms your academic journey. Limited seats available for the upcoming batch.
+              </p>
+              
+              {/* Benefits list */}
+              <div className="flex flex-row gap-4 sm:gap-6 mb-8 justify-center lg:justify-start">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                    <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  </div>
+                  <span className="text-gray-700 font-medium">Free Demo Class</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Users className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <span className="text-gray-700 font-medium">Small Batches</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - Enhanced Form Card */}
+            <div className="lg:w-1/2 w-full">
+              <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 relative">
+                {/* Decorative gradient border */}
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent rounded-3xl p-0.5">
+                  <div className="bg-white rounded-3xl h-full w-full"></div>
+                </div>
+                
+                <div className="relative z-10">
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">
+                      Book Your Free Demo Class
+                    </h3>
+                    <p className="text-gray-600">
+                      Experience our teaching methodology firsthand
+                    </p>
+                  </div>
+                  <EnquiryForm />
+                </div>
               </div>
             </div>
           </div>
