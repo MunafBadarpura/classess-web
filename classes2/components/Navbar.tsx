@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { BRAND_NAME, NAVIGATION } from '../constants';
 import EnrollmentModal from './EnrollmentModal';
@@ -60,6 +60,18 @@ const Navbar: React.FC = () => {
     }, 100); // Small delay to ensure navigation completes
   };
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsOpen(false); // Close mobile menu if open
+    // Smooth scroll to top with animation
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
   return (
     <>
       <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
@@ -84,17 +96,17 @@ const Navbar: React.FC = () => {
               {/* Desktop Menu */}
               <div className="hidden md:flex items-center space-x-8">
                 {NAVIGATION.map((item) => (
-                  <NavLink
+                  <button
                     key={item.name}
-                    to={item.path}
-                    className={({ isActive }) =>
-                      `text-sm font-medium transition-colors duration-200 ${
-                        isActive ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
-                      }`
-                    }
+                    onClick={() => handleNavigation(item.path)}
+                    className={`text-sm font-medium transition-all duration-200 ${
+                      location.pathname === item.path 
+                        ? 'text-gray-900' 
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
                   >
                     {item.name}
-                  </NavLink>
+                  </button>
                 ))}
                 <button 
                   className="bg-brand-purple hover:bg-purple-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-200"
@@ -124,17 +136,17 @@ const Navbar: React.FC = () => {
         <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-xl transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="px-4 pt-2 pb-6 space-y-2">
             {NAVIGATION.map((item) => (
-              <NavLink
+              <button
                 key={item.name}
-                to={item.path}
-                className={({ isActive }) =>
-                  `block px-3 py-3 rounded-lg text-base font-medium ${
-                    isActive ? 'bg-brand-light text-brand-blue' : 'text-gray-600 hover:bg-gray-50'
-                  }`
-                }
+                onClick={() => handleNavigation(item.path)}
+                className={`block w-full text-left px-3 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
+                  location.pathname === item.path 
+                    ? 'bg-brand-light text-brand-blue' 
+                    : 'text-gray-600 hover:bg-gray-50'
+                }`}
               >
                 {item.name}
-              </NavLink>
+              </button>
             ))}
             <div className="pt-4">
                <button 

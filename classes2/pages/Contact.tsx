@@ -5,9 +5,9 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
-    <div className="pt-20">
+    <div>
       {/* Header */}
-      <section className="relative bg-gradient-to-br from-brand-light via-white to-blue-50 pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-brand-light via-white to-blue-50 pt-52 pb-20 lg:pt-60 lg:pb-32 overflow-x-clip">
         {/* Background decorative elements */}
         <div className="absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute bottom-20 left-20 w-32 h-32 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
