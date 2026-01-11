@@ -2,33 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Marquee animation for testimonials - Seamless continuous scroll */
+/* ================================
+   Seamless Infinite Marquee
+   ================================ */
+
+/* Move exactly half of duplicated content */
 @keyframes marquee {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(calc(-306px * 3)); /* Exact width of 3 testimonials (300px + 6px gap each) */
+  to {
+    transform: translateX(-50%);
   }
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
+/* Marquee track */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  min-width: 200%;
+  animation: marquee 60s linear infinite;
 }
 
-/* Faster animation on mobile screens */
+/* Faster animation on mobile */
 @media (max-width: 767px) {
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
+  .marquee-track {
+    animation-duration: 45s;
   }
 }
 
-/* Remove old animation */
-.animate-scroll-left {
-  /* This class is no longer used */
-}
+/* Optional: Pause on hover (recommended) */
+/* .marquee-track:hover {
+  animation-play-state: paused;
+} */
 
-/* Blob animations */
+/* ================================
+   Blob animations
+   ================================ */
+
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);
@@ -52,7 +63,10 @@
   animation-delay: 2s;
 }
 
-/* Fade in up animation */
+/* ================================
+   Fade in up animation
+   ================================ */
+
 @keyframes fade-in-up {
   0% {
     opacity: 0;

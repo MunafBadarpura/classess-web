@@ -2,12 +2,24 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Check, Heart, BookOpen, Target, Users2, Users, Award, Clock, Lightbulb, Apple, Star } from 'lucide-react';
 import { BRAND_NAME, FEATURES, ACHIEVEMENTS, PROGRAMS, TESTIMONIALS } from '../constants';
+import { Testimonial } from '../types';
 import Button from '../components/Button';
 import WaveSeparator from '../components/WaveSeparator';
 import EnquiryForm from '../components/EnquiryForm';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+
+  // Dynamic testimonial filling for seamless marquee
+  const CARD_WIDTH = 300 + 24; // card width + gap
+  const MIN_TRACK_WIDTH = typeof window !== 'undefined' ? window.innerWidth * 2 : 3840; // fallback for SSR
+  const filledTestimonials: Testimonial[] = [];
+  let index = 0;
+  
+  while (filledTestimonials.length * CARD_WIDTH < MIN_TRACK_WIDTH) {
+    filledTestimonials.push(TESTIMONIALS[index % TESTIMONIALS.length]);
+    index++;
+  }
 
   return (
     <div className="overflow-x-hidden">
@@ -331,12 +343,11 @@ const Home: React.FC = () => {
   </div>
 
   {/* Marquee */}
-  <div className="relative overflow-hidden">
-    <div className="flex gap-6 animate-marquee">
-      {/* Create exactly 6 testimonials (2 complete sets) for seamless loop */}
-      {[...TESTIMONIALS, ...TESTIMONIALS].map((testimonial, index) => (
+  <div className="relative overflow-hidden w-full">
+    <div className="marquee-track flex gap-6">
+      {[...filledTestimonials, ...filledTestimonials].map((testimonial, i) => (
         <div
-          key={index}
+          key={`${testimonial.id}-${i}`}
           className="bg-white p-6 rounded-2xl shadow-sm w-[300px] flex-shrink-0 text-center"
         >
           {/* Text */}
@@ -346,37 +357,35 @@ const Home: React.FC = () => {
 
           {/* Stars */}
           <div className="flex justify-center gap-0.5 mb-4">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_, j) => (
               <Star
-                key={i}
+                key={j}
                 className="w-4 h-4 fill-yellow-400 text-yellow-400"
               />
             ))}
           </div>
 
-            {/* Author */}
-            <div className="flex items-center justify-center gap-3">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                style={{
-                  backgroundColor: `hsl(${(index % 3 * 120) % 360}, 70%, 60%)`,
-                }}
-              >
-                {testimonial.author.charAt(0)}
-              </div>
-              <div className="text-left">
-                <h4 className="font-semibold text-gray-900 text-sm">
-                  {testimonial.author}
-                </h4>
-                <p className="text-xs text-gray-500">
-                  {testimonial.role}
-                </p>
-              </div>
+          {/* Author */}
+          <div className="flex items-center justify-center gap-3">
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+              style={{
+                backgroundColor: `hsl(${(i % 3) * 120}, 70%, 60%)`,
+              }}
+            >
+              {testimonial.author.charAt(0)}
+            </div>
+            <div className="text-left">
+              <h4 className="font-semibold text-gray-900 text-sm">
+                {testimonial.author}
+              </h4>
+              <p className="text-xs text-gray-500">{testimonial.role}</p>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
+  </div>
 </section>
 
     
