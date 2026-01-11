@@ -19,12 +19,23 @@ const About: React.FC = () => {
   return (
     <div className="pt-20">
       {/* Header */}
-      <section className="bg-brand-light pt-20 pb-36 md:pb-48 relative">
+      <section className="relative bg-gradient-to-br from-brand-light via-white to-blue-50 pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute bottom-20 left-20 w-32 h-32 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-50"></div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-6">About MindRise</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">Building strong fundamentals and academic confidence since 2021.</p>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 text-brand-accent font-semibold text-sm mb-6">
+            Our Story
+          </span>
+          <h1 className="text-4xl lg:text-6xl font-display font-bold text-gray-900 leading-[1.15] mb-6">
+            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">MindRise</span>
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Building strong fundamentals and academic confidence since 2021. Where every student's potential is nurtured with care and expertise.
+          </p>
         </div>
-        <WaveSeparator position="bottom" color="fill-white" />
       </section>
 
       {/* Main Content */}

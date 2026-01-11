@@ -1,18 +1,29 @@
 import React from 'react';
 import { CONTACT_INFO } from '../constants';
 import EnquiryForm from '../components/EnquiryForm';
-import WaveSeparator from '../components/WaveSeparator';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
     <div className="pt-20">
-      <section className="bg-brand-purple pt-20 pb-36 md:pb-48 text-center relative text-white">
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">Contact Us</h1>
-          <p className="text-xl text-purple-100 max-w-2xl mx-auto">Have questions? We are here to help you start your learning journey.</p>
+      {/* Header */}
+      <section className="relative bg-gradient-to-br from-brand-light via-white to-blue-50 pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute bottom-20 left-20 w-32 h-32 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 text-brand-accent font-semibold text-sm mb-6">
+            Get In Touch
+          </span>
+          <h1 className="text-4xl lg:text-6xl font-display font-bold text-gray-900 leading-[1.15] mb-6">
+            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">Us</span>
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Have questions? We are here to help you start your learning journey.
+          </p>
         </div>
-        <WaveSeparator position="bottom" color="fill-white" />
       </section>
 
       <section className="py-20 bg-white">

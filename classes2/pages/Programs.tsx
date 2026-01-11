@@ -1,6 +1,5 @@
 import React from 'react';
 import { PROGRAMS } from '../constants';
-import WaveSeparator from '../components/WaveSeparator';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { Check } from 'lucide-react';
@@ -10,12 +9,24 @@ const Programs: React.FC = () => {
 
   return (
     <div className="pt-20">
-      <section className="bg-brand-blue pt-20 pb-36 md:pb-48 text-center relative text-white">
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">Our Programs</h1>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">Structured courses designed to help you excel in your exams and build a strong foundation.</p>
+      {/* Header */}
+      <section className="relative bg-gradient-to-br from-brand-light via-white to-blue-50 pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 right-20 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute bottom-20 left-20 w-32 h-32 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-accent/10 text-brand-accent font-semibold text-sm mb-6">
+            Learn With Us
+          </span>
+          <h1 className="text-4xl lg:text-6xl font-display font-bold text-gray-900 leading-[1.15] mb-6">
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple">Programs</span>
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Structured courses designed to help you excel in your exams and build a strong foundation.
+          </p>
         </div>
-        <WaveSeparator position="bottom" color="fill-gray-50" />
       </section>
 
       <section className="py-20 bg-gray-50">
