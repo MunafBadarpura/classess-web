@@ -2,7 +2,7 @@ import React from 'react';
 import { TUTOR_NAME, LOCATION, TESTIMONIALS } from '../constants';
 import { Testimonial } from '../types';
 import WaveSeparator from '../components/WaveSeparator';
-import { CheckCircle2, Heart, Shield, Users, Building, Star } from 'lucide-react';
+import { CheckCircle2, Heart, Shield, Users, Building, Star, HelpCircle, BookOpen, Clock, TrendingUp, Award } from 'lucide-react';
 
 const About: React.FC = () => {
   // Dynamic testimonial filling for seamless marquee
@@ -18,6 +18,8 @@ const About: React.FC = () => {
 
   return (
     <div className="pt-20">
+
+
       {/* Header */}
       <section className="relative bg-gradient-to-br from-brand-light via-white to-blue-50 pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         {/* Background decorative elements */}
@@ -36,6 +38,7 @@ const About: React.FC = () => {
             Building strong fundamentals and academic confidence since 2021. Where every student's potential is nurtured with care and expertise.
           </p>
         </div>
+        {/* <WaveSeparator position="bottom" color="fill-white" /> */}
       </section>
 
       {/* Main Content */}
@@ -180,6 +183,66 @@ const About: React.FC = () => {
         </div>
       </section>
 
+
+       {/* ================= WHY TRUST US ================= */}
+      <section className="py-20 bg-blue-50">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-display font-bold mb-12">
+            Why Parents Trust MindRise
+          </h2>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+                icon: TrendingUp,
+                title: 'Proven Results',
+                text: 'Consistent academic improvement',
+              },
+              {
+                icon: Clock,
+                title: 'Personal Attention',
+                text: 'Limited batch size',
+              },
+              {
+                icon: Award,
+                title: 'Experienced Teaching',
+                text: '3+ years of excellence',
+              },
+              {
+                icon: Shield,
+                title: 'Safe Environment',
+                text: 'Supportive & disciplined',
+              },
+            ].map(({ icon: Icon, title, text }) => (
+              <div
+                key={title}
+                className="bg-white p-6 rounded-2xl shadow-sm"
+              >
+                <Icon className="w-8 h-8 text-brand-blue mx-auto mb-4" />
+                <h3 className="font-bold mb-2">{title}</h3>
+                <p className="text-gray-600 text-sm">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    
+
+
+      {/* ================= FINAL CTA ================= */}
+      <section className="py-20 bg-gradient-to-r from-brand-purple to-brand-blue text-white text-center">
+        <h2 className="text-4xl font-display font-bold mb-6">
+          Let’s Build Your Child’s Confidence Together
+        </h2>
+        <p className="max-w-xl mx-auto mb-8">
+          Join MindRise and experience learning that truly makes a difference.
+        </p>
+        <button className="bg-white text-brand-purple px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+          Enquire for Free
+        </button>
+      </section>
+
+
       {/* Testimonials */}
       <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
         <div className="text-center mb-16">
@@ -238,6 +301,34 @@ const About: React.FC = () => {
             ))}
           </div>
         </div>
+
+
+      {/* ================= FAQ ================= */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-4xl font-display font-bold text-center mb-12">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-6">
+            {[
+              'Which classes do you teach?',
+              'Do you provide personal attention?',
+              'Are regular tests conducted?',
+              'How can parents track progress?',
+            ].map((q) => (
+              <div
+                key={q}
+                className="flex items-start gap-4 bg-white p-6 rounded-xl shadow-sm"
+              >
+                <HelpCircle className="text-brand-blue w-6 h-6 mt-1" />
+                <p className="font-medium">{q}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       </section>
     </div>
   );
