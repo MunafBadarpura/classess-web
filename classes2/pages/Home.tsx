@@ -316,38 +316,43 @@ const Home: React.FC = () => {
       </section>
 
       {/* Testimonials */}
-      {/* Testimonials */}
 <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
-  <div className="max-w-7xl mx-auto px-4">
-    <div className="text-center mb-16">
-      <h2 className="text-3xl lg:text-4xl font-display font-bold text-gray-900">
-        Parent & Student Love
+  <div className="text-center mb-16">
+        <h2 className="text-4xl lg:text-4xl font-display font-bold text-gray-900">
+      Parent & Student{" "}
+        <span className="relative inline-block">
+          <span className="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent">
+            Love
+          </span>
+          <span className="absolute left-0 -bottom-1 w-full h-1 bg-pink-200 rounded-full"></span>
+        </span>
       </h2>
-    </div>
 
-    {/* Marquee */}
-    <div className="relative overflow-hidden">
-      <div className="flex gap-6 animate-marquee">
-        {/* Create exactly 6 testimonials (2 complete sets) for seamless loop */}
-        {[...TESTIMONIALS, ...TESTIMONIALS].map((testimonial, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 rounded-2xl shadow-sm w-[300px] flex-shrink-0 text-center"
-          >
-            {/* Text */}
-            <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
-              {testimonial.text}
-            </p>
+  </div>
 
-            {/* Stars */}
-            <div className="flex justify-center gap-0.5 mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                />
-              ))}
-            </div>
+  {/* Marquee */}
+  <div className="relative overflow-hidden">
+    <div className="flex gap-6 animate-marquee">
+      {/* Create exactly 6 testimonials (2 complete sets) for seamless loop */}
+      {[...TESTIMONIALS, ...TESTIMONIALS].map((testimonial, index) => (
+        <div
+          key={index}
+          className="bg-white p-6 rounded-2xl shadow-sm w-[300px] flex-shrink-0 text-center"
+        >
+          {/* Text */}
+          <p className="text-gray-800 text-sm leading-relaxed mb-6 h-20 overflow-hidden">
+            {testimonial.text}
+          </p>
+
+          {/* Stars */}
+          <div className="flex justify-center gap-0.5 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className="w-4 h-4 fill-yellow-400 text-yellow-400"
+              />
+            ))}
+          </div>
 
             {/* Author */}
             <div className="flex items-center justify-center gap-3">
@@ -372,7 +377,6 @@ const Home: React.FC = () => {
         ))}
       </div>
     </div>
-  </div>
 </section>
 
     
